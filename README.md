@@ -1,12 +1,12 @@
-# ASGCN
-
-**ASGCN** - **A**spect-**S**pecific **G**raph **C**onvolutional **N**etwork
-* Code and preprocessed dataset for [EMNLP 2019](https://www.emnlp-ijcnlp2019.org/program/accepted/) paper titled "[Aspect-based Sentiment Classification with Aspect-specific Graph Convolutional Networks](https://arxiv.org/abs/1909.03477)" 
-* [Chen Zhang](https://genezc.github.io), [Qiuchi Li](https://qiuchili.github.io) and [Dawei Song](http://cs.bit.edu.cn/szdw/jsml/js/sdw/index.htm).
-
-## Updates
-
-* 10/5/2020: Many of you may be faced with [reproducibility issue](https://github.com/GeneZC/ASGCN/issues/2) owing to corrupted word vectors when downloading (i.e., glove.840B.300d.txt is generally too large). Thus, we have released [trimmed version](/300_rest14_embedding_matrix.pkl) of word embeddings on rest14 dataset as a pickled file along with [vocabulary](/rest14_word2idx.pkl) for you to verify the reproducibility. Additionally, we have added a warning in the code when corrupted word vectors are detected.
+#Sentic GCN
+# Introduction
+This repository was used in our paper:  
+  
+[**Aspect-based sentiment analysis via affective knowledge enhanced graph convolutional networks**](https://www.sciencedirect.com/science/article/abs/pii/S0950705121009059)
+<br>
+Bin Liang, Hang Su, Lin Gui, Erik Cambria, Ruifeng Xu. *Knowledge-Based Systems, 2021: 107643.*
+  
+Please cite our paper and kindly give a star for this repository if you use this code.
 
 ## Requirements
 
@@ -25,44 +25,49 @@ and
 ```bash
 python -m spacy download en
 ```
-* Generate graph data with
+* Generate aspect-focused graph with
 ```bash
-python dependency_graph.py
+python generate_graph_for_aspect.py
 ```
-* Download pretrained GloVe embeddings with this [link](http://nlp.stanford.edu/data/wordvecs/glove.840B.300d.zip) and extract `glove.840B.300d.txt` into `glove/`.
-* Train with command, optional arguments could be found in [train.py](/train.py)
+* Generate inter-aspect graph with
 ```bash
-python train.py --model_name asgcn --dataset rest14 --save True
+python generate_position_con_graph.py
 ```
-* Infer with [infer.py](/infer.py)
 
-## Model
+## Training
+* Train with command, optional arguments could be found in [train.py](/train.py) \& [train_bert.py](/train_bert.py)
 
-we propose to build a Graph Convolutional Network (GCN) over the dependency tree of a sentence to exploit syntactical information and word dependencies. Based on it, a novel aspectspecific sentiment classification framework is raised.
 
-An overview of our proposed model is given below
+* Run intergcn: ```./run_intergcn.sh```
 
-![model](/assets/model.png)
+* Run afgcn: ```./run_afgcn.sh```
+
+
+
+* Run intergcn_bert: ```./run_intergcn_bert.sh```
+
+* Run afgcn_bert: ```./run_afgcn_bert.sh```
+
+
 
 ## Citation
 
-If you use the code in your paper, please kindly star this repo and cite our paper
+The BibTex of the citation is as follow:
 
 ```bibtex
-@inproceedings{zhang-etal-2019-aspect, 
-    title = "Aspect-based Sentiment Classification with Aspect-specific Graph Convolutional Networks", 
-    author = "Zhang, Chen and Li, Qiuchi and Song, Dawei", 
-    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)", 
-    month = nov, year = "2019", 
-    address = "Hong Kong, China", 
-    publisher = "Association for Computational Linguistics", 
-    url = "https://www.aclweb.org/anthology/D19-1464", 
-    doi = "10.18653/v1/D19-1464", 
-    pages = "4560--4570",
-} 
+@article{liang2021aspect,
+  title={Aspect-based sentiment analysis via affective knowledge enhanced graph convolutional networks},
+  author={Liang, Bin and Su, Hang and Gui, Lin and Cambria, Erik and Xu, Ruifeng},
+  journal={Knowledge-Based Systems},
+  pages={107643},
+  year={2021},
+  publisher={Elsevier}
+}
 ```
+
 
 ## Credits
 
-* Code of this repo heavily relies on [ABSA-PyTorch](https://github.com/songyouwei/ABSA-PyTorch), in which I am one of the contributors.
-* For any issues or suggestions about this work, don't hesitate to create an issue or directly contact me via [gene_zhangchen@163.com](mailto:gene_zhangchen@163.com) !
+* The code of this repository partly relies on [ASGCN](https://github.com/GeneZC/ASGCN) \& [ABSA-PyTorch](https://github.com/songyouwei/ABSA-PyTorch). 
+* Here, I would like to express my gratitude to the authors of the [ASGCN](https://github.com/GeneZC/ASGCN) \& [ABSA-PyTorch](https://github.com/songyouwei/ABSA-PyTorch) repositories.
+
