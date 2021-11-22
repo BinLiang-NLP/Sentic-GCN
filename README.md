@@ -17,6 +17,7 @@ Please cite our paper and kindly give a star for this repository if you use this
 
 ## Usage
 
+* Please download [SenticNet](https://sentic.net/) from https://sentic.net/downloads/.
 * Install [SpaCy](https://spacy.io/) package and language models with
 ```bash
 pip install spacy
