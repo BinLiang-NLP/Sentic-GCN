@@ -2,7 +2,7 @@
 # Introduction
 This repository was used in our paper:  
   
-[**Aspect-based sentiment analysis via affective knowledge enhanced graph convolutional networks**](https://www.sciencedirect.com/science/article/abs/pii/S0950705121009059)
+[**Aspect-based sentiment analysis via affective knowledge enhanced graph convolutional networks**](https://www.sentic.net/sentic-gcn.pdf)
 <br>
 Bin Liang, Hang Su, Lin Gui, Erik Cambria, Ruifeng Xu. *Knowledge-Based Systems, 2021: 107643.*
   
