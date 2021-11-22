@@ -63,6 +63,7 @@ The BibTex of the citation is as follow:
 
 ## Credits
 
+* The affective knowledge used in this work is from [SenticNet](https://sentic.net/), I would like to express my heartfelt thanks to all the authors of SenticNet. 
 * The code of this repository partly relies on [ASGCN](https://github.com/GeneZC/ASGCN) \& [ABSA-PyTorch](https://github.com/songyouwei/ABSA-PyTorch). 
 * Here, I would like to express my gratitude to the authors of the [ASGCN](https://github.com/GeneZC/ASGCN) \& [ABSA-PyTorch](https://github.com/songyouwei/ABSA-PyTorch) repositories.
 
