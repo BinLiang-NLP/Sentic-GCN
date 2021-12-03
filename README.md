@@ -41,7 +41,7 @@ python generate_sentic_dependency_graph.py
 
 ## Training
 * Train with command, optional arguments could be found in [train.py](/train.py) \& [train_bert.py](/train_bert.py)
-
+* Please tune the argument of *--seed* for better performance
 
 
 * Run senticgcn: ```./run_senticgcn.sh```
