@@ -34,6 +34,10 @@ python generate_dependency_graph.py
 ```bash
 python generate_sentic_graph.py
 ```
+* Generate sentic & dependeny graph with
+```bash
+python generate_sentic_dependency_graph.py
+```
 
 ## Training
 * Train with command, optional arguments could be found in [train.py](/train.py) \& [train_bert.py](/train_bert.py)
