@@ -65,7 +65,7 @@ The BibTex of the citation is as follow:
 ```
 
 ## See Also
-* The original knowledge base of [SenticNet](https://sentic.net/) can be found at https://sentic.net/downloads/.
+* The original knowledge base of [SenticNet](https://sentic.net/) could be found at https://sentic.net/downloads/.
 
 
 ## Credits
