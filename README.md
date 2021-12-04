@@ -1,4 +1,4 @@
-#Sentic GCN
+# The Source Code of *Sentic GCN*
 # Introduction
 This repository was used in our paper:  
   
