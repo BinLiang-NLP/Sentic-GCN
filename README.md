@@ -1,4 +1,4 @@
-# The Source Code of *Sentic GCN*
+# Sentic GCN: Aspect-Based Sentiment Analysis via Affective Knowledge Enhanced Graph Convolutional Networks
 # Introduction
 This repository was used in our paper:  
   
