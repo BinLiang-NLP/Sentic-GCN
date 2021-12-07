@@ -50,12 +50,10 @@ class SenticGCN_BERT(nn.Module):
         self.text_embed_dropout = nn.Dropout(0.3)
 
     def position_weight(self, x, aspect_double_idx, text_len, aspect_len):
-        #batch_size = x.shape[0]
-        #seq_len = x.shape[1]
-        batch_size = len(x)
-        seq_len = len(x[1])
-        #print('batch_size:', batch_size)
-        #print('seq_len:', seq_len)
+        batch_size = x.shape[0]
+        seq_len = x.shape[1]
+        #batch_size = len(x)
+        #seq_len = len(x[1])
         aspect_double_idx = aspect_double_idx.cpu().numpy()
         text_len = text_len.cpu().numpy()
         aspect_len = aspect_len.cpu().numpy()
@@ -64,7 +62,7 @@ class SenticGCN_BERT(nn.Module):
             context_len = text_len[i] - aspect_len[i]
             for j in range(aspect_double_idx[i,0]):
                 weight[i].append(1-(aspect_double_idx[i,0]-j)/context_len)
-            for j in range(aspect_double_idx[i,0], aspect_double_idx[i,1]+1):
+            for j in range(aspect_double_idx[i,0], min(aspect_double_idx[i,1]+1,self.opt.max_seq_len)):
                 weight[i].append(0)
             for j in range(aspect_double_idx[i,1]+1, text_len[i]):
                 weight[i].append(1-(j-aspect_double_idx[i,1])/context_len)
@@ -80,9 +78,9 @@ class SenticGCN_BERT(nn.Module):
         for i in range(batch_size):
             for j in range(aspect_double_idx[i,0]):
                 mask[i].append(0)
-            for j in range(aspect_double_idx[i,0], aspect_double_idx[i,1]+1):
+            for j in range(aspect_double_idx[i,0], min(aspect_double_idx[i,1]+1, self.opt.max_seq_len)):
                 mask[i].append(1)
-            for j in range(aspect_double_idx[i,1]+1, seq_len):
+            for j in range(min(aspect_double_idx[i,1]+1, self.opt.max_seq_len), seq_len):
                 mask[i].append(0)
         mask = torch.tensor(mask).unsqueeze(2).float().to(self.opt.device)
         return mask*x
@@ -100,9 +98,6 @@ class SenticGCN_BERT(nn.Module):
         encoder_layer, pooled_output = self.bert(text_bert_indices, token_type_ids=bert_segments_ids, output_all_encoded_layers=False)
 
         text_out = encoder_layer
-        #text_out = pooled_output
-        #text_out, (_,_) = self.text_lstm(text_out, text_len)
-        #print('text_out:', len(text_out), len(text_out[1]))
 
         x = F.relu(self.gc1(self.position_weight(text_out, aspect_double_idx, text_len, aspect_len), adj))
         x = F.relu(self.gc2(self.position_weight(x, aspect_double_idx, text_len, aspect_len), adj))

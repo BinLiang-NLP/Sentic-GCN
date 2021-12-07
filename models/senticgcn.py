@@ -83,7 +83,7 @@ class SenticGCN(nn.Module):
 
     def forward(self, inputs):
         text_indices, aspect_indices, left_indices, adj = inputs
-        text_len = torch.sum(text_indices != 0, dim=-1)
+        text_len = torch.sum(text_indices != 0, dim=-1).cpu()
         aspect_len = torch.sum(aspect_indices != 0, dim=-1)
         left_len = torch.sum(left_indices != 0, dim=-1)
         aspect_double_idx = torch.cat([left_len.unsqueeze(1), (left_len+aspect_len-1).unsqueeze(1)], dim=1)

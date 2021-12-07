@@ -145,6 +145,8 @@ class ABSADataset(Dataset):
         for i in range(0, len(lines), 3):
             graph_id = i
             text_left, _, text_right = [s.lower().strip() for s in lines[i].partition("$T$")]
+            text_left = text_left.strip()
+            text_right = text_right.strip()
             aspect = lines[i + 1].lower().strip()
             polarity = lines[i + 2].strip()
             context = text_left + " " + aspect + " " + text_right
