@@ -1,0 +1,3 @@
+*..rdf.xml filter=lfs diff=lfs merge=lfs -text
+*.rdf.xml filter=lfs diff=lfs merge=lfs -text
+*.xml filter=lfs diff=lfs merge=lfs -text

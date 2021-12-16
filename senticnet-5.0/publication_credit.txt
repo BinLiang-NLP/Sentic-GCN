@@ -1,0 +1,7 @@
+Thank you for using SenticNet 5!
+
+Please acknowledge the authors by citing the following publication
+in any research work or presentation containing results obtained
+in whole or in part through the use of SenticNet 5:
+
+E Cambria, S Poria, D Hazarika, K Kwok. SenticNet 5: Discovering conceptual primitives for sentiment analysis by means of context embeddings. In: AAAI, pp. 1795-1802 (2018)
