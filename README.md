@@ -66,7 +66,7 @@ The BibTex of the citation is as follow:
 
 ## See Also
 * The original knowledge base of [SenticNet](https://sentic.net/) could be found at https://sentic.net/downloads/.
-* The knowledge source used in this code is stored at [senticnet-5.0](/senticnet-5.0).
+* The knowledge source used in this code is SenticNet5.0, which is stored at [senticnet-5.0/senticnet5.txt](/senticnet-5.0/senticnet5.txt).
 * We also set several variants of our model:
     | Model        | Decription |
     | --------   | -----   |
