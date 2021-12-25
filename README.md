@@ -69,7 +69,7 @@ The BibTex of the citation is as follow:
 * We also set several variants of our model:
     | Model        | Decription |
     | --------   | -----   |
-    | [affectivegcn.py](/models/affectivegcn.py) |   Only using affective information (i.e. Eq.2) for building graphs |
+    | [affectivegcn.py](/models/affectivegcn.py) |   Only using the affective information (i.e. Eq.2) for building graphs |
     | [attsenticgcn.py](/models/attsenticgcn.py) |   Combining our model with attention mechanism |
     | [sdgcn.py](/models/sdgcn.py) |   Interactively performing the graph convolutional operation based on dependency (i.e. Eq. 1) and affective (i.e. Eq.2) graphs |
 
