@@ -73,7 +73,7 @@ The BibTex of the citation is as follow:
     | [asgcn.py](/models/asgcn.py) |   Only using dependency information for building graphs, please see the detail of this model at [ASGCN](https://github.com/GeneZC/ASGCN) |
     | [ascnn.py](/models/ascnn.py) |   Only using CNN to learn the information rather than GCN |
     | [attsenticgcn.py](/models/attsenticgcn.py) |   Combining our model with attention mechanism |
-    | [sdgcn.py](/models/sdgcn.py) |   Interactively performing the graph convolutional operation based on dependency and affective graphs |
+    | [sdgcn.py](/models/sdgcn.py) |   Interactively performing the graph convolutional operation based on dependency (i.e. Eq. 1) and affective (i.e. Eq.2) graphs |
 
 
 ## Credits
