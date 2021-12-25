@@ -10,7 +10,7 @@ import torch.nn as nn
 from bucket_iterator import BucketIterator
 from sklearn import metrics
 from data_utils import ABSADatesetReader
-from models import LSTM, ASCNN, ASGCN, SenticGCN, ATTSenticGCN, SDGCN, AFFGCN
+from models import LSTM, SenticGCN, ATTSenticGCN, SDGCN, AFFGCN
 
 class Instructor:
     def __init__(self, opt):
@@ -184,9 +184,6 @@ if __name__ == '__main__':
 
     model_classes = {
         'lstm': LSTM,
-        'ascnn': ASCNN,
-        'asgcn': ASGCN,
-        'astcn': ASGCN,
         'senticgcn': SenticGCN,
         'attsenticgcn': ATTSenticGCN,
         'sdgcn': SDGCN,
@@ -194,9 +191,6 @@ if __name__ == '__main__':
     }
     input_colses = {
         'lstm': ['text_indices'],
-        'ascnn': ['text_indices', 'aspect_indices', 'left_indices'],
-        'asgcn': ['text_indices', 'aspect_indices', 'left_indices', 'dependency_graph'],
-        'astcn': ['text_indices', 'aspect_indices', 'left_indices', 'dependency_graph'],
         'senticgcn': ['text_indices', 'aspect_indices', 'left_indices', 'sdat_graph'],
         'sdgcn': ['text_indices', 'aspect_indices', 'left_indices', 'sentic_graph', 'sdat_graph'],
         'affgcn': ['text_indices', 'aspect_indices', 'left_indices', 'sentic_graph'],
