@@ -66,7 +66,10 @@ The BibTex of the citation is as follow:
 
 ## See Also
 * The original knowledge base of [SenticNet](https://sentic.net/) could be found at https://sentic.net/downloads/.
-* We also set several variants of our model.
+* We also set several variants of our model:
+*   | Model        | Decription |
+    | --------   | -----:   |
+    | [affectivegcn.py](/models/affectivegcn.py) |   Only using affective information when building graphs |
 
 
 ## Credits
