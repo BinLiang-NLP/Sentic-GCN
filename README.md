@@ -1,4 +1,4 @@
-# Sentic GCN: Aspect-Based Sentiment Analysis via Affective Knowledge Enhanced Graph Convolutional Networks
+# Sentic GCN: A Simple But Effective Framework for Aspect-Based Sentiment Analysis via Affective Knowledge Enhanced GCN
 # Introduction
 This repository was used in our paper:  
   
