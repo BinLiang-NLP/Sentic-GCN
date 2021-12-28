@@ -49,7 +49,7 @@ python generate_sentic_dependency_graph.py
 
 
 ## Testing
-* Testing with the model saved in state_dict. Optional arguments could be found in [infer.py](/infer.py) \& [infer_for_bert.py](/infer_for_bert.py)
+* Testing with the model saved in **state_dict**. Optional arguments could be found in [infer.py](/infer.py) \& [infer_for_bert.py](/infer_for_bert.py)
 * Please run ```python infer.py``` for the testing of non-BERT models.
 * Please run ```python infer_for_bert.py``` for the testing of BERT-based models.
 
