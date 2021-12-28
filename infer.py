@@ -6,10 +6,11 @@ import torch
 import torch.nn.functional as F
 import argparse
 
-from data_utils import ABSADatesetReader, ABSADataset, Tokenizer, build_embedding_matrix
+from data_utils import ABSADataset, Tokenizer, build_embedding_matrix
+from data_utils import ABSADatesetReader
 from bucket_iterator import BucketIterator
-from models import LSTM, ASGCN, ASCNN
-from dependency_graph import dependency_adj_matrix
+from models import LSTM, SenticGCN, SenticGCN_BERT
+from generate_sentic_dependency_graph import load_sentic_word, dependency_adj_matrix
 
 
 class Inferer:
@@ -61,18 +62,19 @@ class Inferer:
         torch.autograd.set_grad_enabled(False)
 
     def evaluate(self, raw_text, aspect):
+        senticNet = load_sentic_word()
         text_seqs = [self.tokenizer.text_to_sequence(raw_text.lower())]
         aspect_seqs = [self.tokenizer.text_to_sequence(aspect.lower())]
         left_seqs = [self.tokenizer.text_to_sequence(raw_text.lower().split(aspect.lower())[0])]
         text_indices = torch.tensor(text_seqs, dtype=torch.int64)
         aspect_indices = torch.tensor(aspect_seqs, dtype=torch.int64)
         left_indices = torch.tensor(left_seqs, dtype=torch.int64)
-        dependency_graph = torch.tensor([dependency_adj_matrix(raw_text.lower())])
+        sdat_graph = torch.tensor([dependency_adj_matrix(raw_text.lower(), aspect.lower(), senticNet)])
         data = {
             'text_indices': text_indices, 
             'aspect_indices': aspect_indices,
             'left_indices': left_indices, 
-            'dependency_graph': dependency_graph
+            'sdat_graph': sdat_graph
         }
         t_inputs = [data[col].to(opt.device) for col in self.opt.inputs_cols]
         t_outputs = self.model(t_inputs)
@@ -87,22 +89,22 @@ if __name__ == '__main__':
     # set your trained models here
     model_state_dict_paths = {
         'lstm': 'state_dict/lstm_'+dataset+'.pkl',
-        'ascnn': 'state_dict/ascnn_'+dataset+'.pkl',
-        'asgcn': 'state_dict/asgcn_'+dataset+'.pkl',
+        'senticgcn': 'state_dict/senticgcn_'+dataset+'.pkl',
+        'senticgcn_bert': 'state_dict/senticgcn_bert_'+dataset+'.pkl',
     }
     model_classes = {
         'lstm': LSTM,
-        'ascnn': ASCNN,
-        'asgcn': ASGCN,
+        'senticgcn': SenticGCN,
+        'senticgcn_bert': SenticGCN_BERT,
     }
     input_colses = {
         'lstm': ['text_indices'],
-        'ascnn': ['text_indices', 'aspect_indices', 'left_indices'],
-        'asgcn': ['text_indices', 'aspect_indices', 'left_indices', 'dependency_graph'],
+        'senticgcn': ['text_indices', 'aspect_indices', 'left_indices', 'sdat_graph'],
+        'senticgcn_bert': ['text_bert_indices', 'text_indices', 'aspect_indices', 'bert_segments_indices', 'left_indices', 'sdat_graph'],
     }
     class Option(object): pass
     opt = Option()
-    opt.model_name = 'asgcn'
+    opt.model_name = 'senticgcn'
     opt.model_class = model_classes[opt.model_name]
     opt.inputs_cols = input_colses[opt.model_name]
     opt.dataset = dataset
@@ -112,7 +114,18 @@ if __name__ == '__main__':
     opt.polarities_dim = 3
     opt.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+    raw_text = 'Food is always fresh and hot - ready to eat !'
+    aspect = 'food'
+
+    print('The input are as follows:')
+    print('Sentence:', raw_text)
+    print('Aspect:', aspect)
+
     inf = Inferer(opt)
-    t_probs = inf.evaluate('The staff should be a bit more friendly .', 'staff')
-    print(t_probs.argmax(axis=-1)[0])
+    print('='*10, 'Inferring ......')
+    t_probs = inf.evaluate(raw_text, aspect)
+    infer_label = t_probs.argmax(axis=-1)[0] - 1
+    label_dict = {-1: 'Negative', 0: 'Neutral', 1: 'Positive'}
+
+    print('The test results is:', infer_label, label_dict[infer_label])
 
