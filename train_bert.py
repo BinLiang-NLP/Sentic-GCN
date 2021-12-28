@@ -126,7 +126,8 @@ class Instructor:
                 max_val_epoch = i_epoch
                 if not os.path.exists('state_dict'):
                     os.mkdir('state_dict')
-                path = 'state_dict/{0}_{1}_val_acc_{2}'.format(self.opt.model_name, self.opt.dataset, round(val_acc, 4))
+                #path = 'state_dict/{0}_{1}_val_acc_{2}'.format(self.opt.model_name, self.opt.dataset, round(val_acc, 4))
+                path = 'state_dict/{0}_{1}{2}'.format(self.opt.model_name, self.opt.dataset, ".pkl")
                 torch.save(self.model.state_dict(), path)
                 logger.info('>> saved: {}'.format(path))
             if val_f1 > max_val_f1:
