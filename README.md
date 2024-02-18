@@ -17,6 +17,8 @@ Please cite our paper and kindly give a star for this repository if you use this
 
 ## Usage
 
+* Please download [Glove Embedding](https://nlp.stanford.edu/data/wordvecs/glove.42B.300d.zip), and put 'glove.42B.300d.txt' under the main directory.
+
 * Install [SpaCy](https://spacy.io/) package and language models with
 ```bash
 pip install spacy
